@@ -2,13 +2,15 @@
 {
     public class Author : BaseEntity
     {
-        public Author(string fullName)
+        public Author(string fullName, DateTime dateBirth)
         {
             FullName = fullName;
-            Books = new List<Book>();
+            DateBirth = dateBirth;
+            Books = new List<Book>();            
         }
 
         public string FullName { get; private set; }
+        public DateTime DateBirth { get; private set; }
 
         public List<Book> Books { get; private set; }
     }

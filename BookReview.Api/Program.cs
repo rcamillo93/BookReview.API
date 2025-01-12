@@ -1,3 +1,5 @@
+using BookReview.Application;
+using BookReview.Infrastructure;
 using BookReview.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("BookReviews");
-
-builder.Services.AddDbContext<BookReviewDbContext>(
-    options => options.UseSqlServer(connectionString));
+builder.Services
+    .AddApplication(builder.Configuration)
+    .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
