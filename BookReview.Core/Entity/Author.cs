@@ -13,5 +13,13 @@
         public DateTime DateBirth { get; private set; }
 
         public List<Book> Books { get; private set; }
+
+
+        public void Update(string fullName, DateTime dateBirth)
+        {
+            FullName = fullName;
+            DateBirth = dateBirth;
+            UpdateAt = DateTime.Now;
+        }
     }
 }

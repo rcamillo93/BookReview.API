@@ -3,7 +3,7 @@ using BookReview.Application.ViewModel;
 using BookReview.Core.Repositories;
 using MediatR;
 
-namespace BookReview.Application.Queries.AuthorQueries
+namespace BookReview.Application.Queries.AuthorQueries.GetById
 {
     public class GetAuthorByIdQueryHandler : IRequestHandler<GetAuthorByIdQuery, ResultViewModel<AuthorViewModel>>
     {

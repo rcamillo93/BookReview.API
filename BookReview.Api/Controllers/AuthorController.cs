@@ -1,13 +1,15 @@
 ﻿using BookReview.Application.Commads.AuthorCommands.Create;
-using BookReview.Application.Queries.AuthorQueries;
+using BookReview.Application.Commads.AuthorCommands.Update;
+using BookReview.Application.Queries.AuthorQueries.GetAll;
+using BookReview.Application.Queries.AuthorQueries.GetById;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookReview.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class AuthorController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -16,6 +18,19 @@ namespace BookReview.Api.Controllers
         {
             _mediator = mediator;
         }     
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var query = new GetAllAuthorsQuery();
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAuthorById(int id)
@@ -38,6 +53,17 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return CreatedAtAction(nameof(GetAuthorById), new { id = result.Data }, command);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(UpdateAuthorCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
         }
     }
 }
