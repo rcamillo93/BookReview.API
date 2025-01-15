@@ -1,28 +1,36 @@
 ﻿using BookReview.Core.Entity;
 using BookReview.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookReview.Infrastructure.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public Task AddAsync(User user)
+        private readonly BookReviewDbContext _dbContext;
+
+        public UserRepository(BookReviewDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<List<User>> GetAllAsync()
+        public async Task AddAsync(User user)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(user);
         }
 
-        public Task<User?> GetByIdAsync(int id)
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.ToListAsync();
         }
 
-        public Task SaveChangesAsync()
+        public async Task<User?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 
