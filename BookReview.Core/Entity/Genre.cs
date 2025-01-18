@@ -10,5 +10,10 @@
             Description = description;     
             Books = new List<Book>();
         }
+
+        public void Update(string description)
+        {            
+            Description = description;
+        }
     }
 }
