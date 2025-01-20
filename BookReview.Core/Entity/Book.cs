@@ -35,5 +35,21 @@
         public Author Author { get; private set; }
         public List<Review> Reviews { get; private set; }
 
+
+        public void Update(string title, string description, string iSBN, int authorId,
+                    string publisher, int genreId, int publicationYear,
+                    int quantityPages, string bookCover)
+        {
+            Title = title;
+            Description = description;
+            ISBN = iSBN;
+            AuthorId = authorId;
+            Publisher = publisher;
+            GenreId = genreId;
+            PublicationYear = publicationYear;
+            QuantityPages = quantityPages;
+            BookCover = bookCover;       
+
+        }
     }
 }

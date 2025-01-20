@@ -1,28 +1,36 @@
 ﻿using BookReview.Core.Entity;
 using BookReview.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookReview.Infrastructure.Persistence.Repositories
 {
     public class GenreRepository : IGenreRepository
     {
-        public Task AddAsync(Genre genre)
+        private readonly BookReviewDbContext _dbContext;
+
+        public GenreRepository(BookReviewDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<List<Genre>> GetAllAsync()
+        public async Task AddAsync(Genre genre)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(genre);
         }
 
-        public Task<Genre?> GetByIdAsync(int id)
+        public async Task<List<Genre>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Genres.ToListAsync();
         }
 
-        public Task SaveChangesAsync()
+        public async Task<Genre?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Genres.SingleOrDefaultAsync(g => g.Id == id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
