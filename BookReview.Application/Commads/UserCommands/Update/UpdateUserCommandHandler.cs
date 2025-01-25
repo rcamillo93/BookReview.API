@@ -22,7 +22,7 @@ namespace BookReview.Application.Commads.UserCommands.Update
 
             user.Update(request.FullName, request.Email);
 
-            _userRepository.SaveChangesAsync();
+            await _userRepository.SaveChangesAsync();
 
             return ResultViewModel.Sucess();
         }

@@ -66,5 +66,8 @@ namespace BookReview.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("review")]
+        public async Task<IActionResult> PostReview()
     }
 }

@@ -27,7 +27,11 @@ namespace BookReview.Infrastructure.Persistence.Configurations
             builder
                 .Property(r => r.Rating)
                 .IsRequired()
-                .HasMaxLength(5);                
+                .HasMaxLength(5);
+
+            builder
+                .Property(r => r.ReadingStartDate)
+                .IsRequired();
         }
     }
 }

@@ -1,8 +1,11 @@
-﻿namespace BookReview.Core.Entity
+﻿using BookReview.Application.Models;
+using MediatR;
+
+namespace BookReview.Application.Commads.ReviewCommans.Create
 {
-    public class Review : BaseEntity
+    public class CreateReviewCommand : IRequest<ResultViewModel<int>>
     {
-        public Review(string description, int userId, int bookId, int rating, DateTime readingStartDate)
+        public CreateReviewCommand(string description, int userId, int bookId, int rating, DateTime readingStartDate)
         {
             Description = description;
             UserId = userId;
@@ -15,10 +18,6 @@
         public int UserId { get; private set; }
         public int BookId { get; private set; }
         public int Rating { get; private set; }
-
         public DateTime ReadingStartDate { get; private set; }
-
-        public Book Book { get; private set; }
-        public User User { get; private set; }
     }
 }

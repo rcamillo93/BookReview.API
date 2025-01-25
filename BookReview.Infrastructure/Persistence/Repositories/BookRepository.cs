@@ -32,5 +32,12 @@ namespace BookReview.Infrastructure.Persistence.Repositories
         {
             await _dbContext.SaveChangesAsync();
         }
+
+
+        public async Task AddReview(Review review)
+        {
+            await _dbContext.AddAsync(review);
+        }
+
     }
 }
