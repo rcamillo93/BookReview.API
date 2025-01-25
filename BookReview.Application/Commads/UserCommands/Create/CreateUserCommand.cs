@@ -5,15 +5,17 @@ namespace BookReview.Application.Commads.UserCommands.Create
 {
     public class CreateUserCommand : IRequest<ResultViewModel<int>>
     {
-        public CreateUserCommand(string fullName, string email, string password)
+        public CreateUserCommand(string fullName, string email, string password, string role)
         {
             FullName = fullName;
             Email = email;
-            Password = password;        
+            Password = password;      
+            Role = role;
         }
 
         public string FullName { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
+        public string Role { get; private set; }
     }
 }

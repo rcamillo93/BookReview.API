@@ -24,6 +24,10 @@ namespace BookReview.Infrastructure.Persistence.Configurations
             builder
                 .Property(u => u.Password)
                 .IsRequired();
+
+            builder
+                .Property(u => u.Role)
+                .HasMaxLength(100);
         }
     }
 }

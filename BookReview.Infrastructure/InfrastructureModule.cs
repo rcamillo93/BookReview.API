@@ -1,6 +1,8 @@
 ﻿using BookReview.Core.Repositories;
+using BookReview.Core.Services;
 using BookReview.Infrastructure.Persistence;
 using BookReview.Infrastructure.Persistence.Repositories;
+using BookReview.Infrastructure.Services.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +12,10 @@ namespace BookReview.Infrastructure
     public static class InfrastructureModule
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        { 
+        {
             services
-                .AddRepositories(configuration);
+                .AddRepositories(configuration)
+                .AddServices();
 
             return services;
         }
@@ -25,8 +28,14 @@ namespace BookReview.Infrastructure
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IGenreRepository, GenreRepository>();
-            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>(); 
+
+            return services;
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }
