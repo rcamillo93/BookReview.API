@@ -16,7 +16,7 @@ namespace BookReview.Application.Queries.BookQueries.GetAll
 
         public async Task<ResultViewModel<List<BookViewModel>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            var books = await _bookRepository.GetAllAsync();
+            var books = await _bookRepository.GetAllAsync(request.AuthorId, request.Title);
 
             var viewModel = books
                             .Select(b => new BookViewModel(b.Id, b.Title, b.Description, b.ISBN,

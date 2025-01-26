@@ -4,7 +4,7 @@ namespace BookReview.Core.Repositories
 {
     public interface IBookRepository
     {
-        Task<List<Book>> GetAllAsync();
+        Task<List<Book>> GetAllAsync(int? authorId, string? title);
         Task<Book?> GetByIdAsync(int id);
         Task AddAsync(Book book);
         Task SaveChangesAsync();

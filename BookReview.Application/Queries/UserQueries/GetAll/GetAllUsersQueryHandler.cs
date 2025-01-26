@@ -16,7 +16,7 @@ namespace BookReview.Application.Queries.UserQueries.GetAll
 
         public async Task<ResultViewModel<List<UserViewModel>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _userRepository.GetAllAsync();
+            var users = await _userRepository.GetAllAsync(request.FullName);
 
             var viewModel = users
                             .Select(u => new UserViewModel(u.Id, u.FullName, u.Email, u.Active))

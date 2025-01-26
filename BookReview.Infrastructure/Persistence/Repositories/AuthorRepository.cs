@@ -18,9 +18,14 @@ namespace BookReview.Infrastructure.Persistence.Repositories
             await _dbContext.AddAsync(author);
         }
 
-        public async Task<List<Author>> GetAllAsync()
+        public async Task<List<Author>> GetAllAsync(string? fullName)
         {
-            return await _dbContext.Authors.ToListAsync();
+            var query = _dbContext.Authors.AsQueryable();
+
+            if (!string.IsNullOrEmpty(fullName))
+                query = query.Where(a => EF.Functions.Like(a.FullName.ToUpper(), $"%{fullName.ToUpper()}%"));
+
+            return await query.ToListAsync();
         }
 
         public async Task<Author?> GetByIdAsync(int id)

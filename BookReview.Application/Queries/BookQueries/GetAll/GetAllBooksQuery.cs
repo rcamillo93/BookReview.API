@@ -6,5 +6,13 @@ namespace BookReview.Application.Queries.BookQueries.GetAll
 {
     public class GetAllBooksQuery : IRequest<ResultViewModel<List<BookViewModel>>>
     {
+        public GetAllBooksQuery(int? authorId, string? title)
+        {
+            AuthorId = authorId;
+            Title = title;
+        }
+
+        public int? AuthorId { get; private set; }
+        public string? Title { get; private set; }
     }
 }

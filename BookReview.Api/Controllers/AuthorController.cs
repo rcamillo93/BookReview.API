@@ -20,9 +20,9 @@ namespace BookReview.Api.Controllers
         }     
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string? fullName)
         {
-            var query = new GetAllAuthorsQuery();
+            var query = new GetAllAuthorsQuery(fullName);
             var result = await _mediator.Send(query);
 
             if (!result.IsSuccess)

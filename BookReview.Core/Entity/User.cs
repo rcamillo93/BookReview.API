@@ -1,13 +1,15 @@
-﻿namespace BookReview.Core.Entity
+﻿using BookReview.Core.Enums;
+
+namespace BookReview.Core.Entity
 {
     public class User : BaseEntity
     {
-        public User(string fullName, string email, string password, string role)
+        public User(string fullName, string email, string password)
         {
             FullName = fullName;
             Email = email;
             Password = password;
-            Role = role;
+            Role = UserRoleEnum.User;
 
             Active = true;            
             Reviews = new List<Review>();            
@@ -20,7 +22,7 @@
 
         public string? TemporaryPassword { get; private set; }
         public DateTime? ValidateHash { get; private set; }
-        public string Role { get; private set; }
+        public UserRoleEnum Role { get; private set; }
 
         public List<Review> Reviews { get; private set; }
 
@@ -29,13 +31,16 @@
             Active = active;
         }
 
-        public void Update(string fullName, string email)
+        public void Update(string fullName, string email, bool? status)
         {
             if(!string.IsNullOrEmpty(fullName))
                 FullName = fullName;
 
             if (!string.IsNullOrEmpty(email))
                 Email = email;
+
+            if(status != null)
+                Active = (bool)status;
         }
 
         public void UpdatePassword(string password)

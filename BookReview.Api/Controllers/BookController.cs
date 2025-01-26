@@ -32,9 +32,9 @@ namespace BookReview.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int? authorId, string?title)
         {
-            var query = new GetAllBooksQuery();
+            var query = new GetAllBooksQuery(authorId, title);
 
             var result = await _mediator.Send(query);
 

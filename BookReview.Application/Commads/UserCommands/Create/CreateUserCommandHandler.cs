@@ -21,7 +21,7 @@ namespace BookReview.Application.Commads.UserCommands.Create
         {
             var passwordHash = _authService.ComputeSha256Hash(request.Password);
 
-            var user = new User(request.FullName, request.Email, passwordHash, request.Role);
+            var user = new User(request.FullName, request.Email, passwordHash);
 
             await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAsync();   

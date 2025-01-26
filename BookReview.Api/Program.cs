@@ -1,7 +1,8 @@
 using BookReview.Application;
+using BookReview.Application.Commads.BookCommands.Create;
 using BookReview.Infrastructure;
-using BookReview.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,10 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddApplication(builder.Configuration)
     .AddInfrastructure(builder.Configuration);
+
+builder.Services
+    .AddFluentValidationAutoValidation()
+    .AddValidatorsFromAssemblyContaining<CreateBookCommand>();
 
 var app = builder.Build();
 

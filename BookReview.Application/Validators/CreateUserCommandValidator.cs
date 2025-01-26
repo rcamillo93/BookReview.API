@@ -18,7 +18,7 @@ namespace BookReview.Application.Validators
 
             RuleFor(u => u.Password)
                 .NotEmpty()
-                    .MinimumLength(6);            
+                    .MinimumLength(6);
         }
     }
 }

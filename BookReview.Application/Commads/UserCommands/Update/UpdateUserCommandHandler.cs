@@ -20,7 +20,7 @@ namespace BookReview.Application.Commads.UserCommands.Update
             if (user == null)
                 return ResultViewModel.Error("Usuário não encontrado");
 
-            user.Update(request.FullName, request.Email);
+            user.Update(request.FullName, request.Email, request.Active);
 
             await _userRepository.SaveChangesAsync();
 

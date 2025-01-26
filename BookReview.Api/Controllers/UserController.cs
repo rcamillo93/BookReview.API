@@ -30,9 +30,9 @@ namespace BookReview.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers(string? fullName)
         {
-            var command = new GetAllUsersQuery();
+            var command = new GetAllUsersQuery(fullName);
 
             var result = await _mediator.Send(command);
 

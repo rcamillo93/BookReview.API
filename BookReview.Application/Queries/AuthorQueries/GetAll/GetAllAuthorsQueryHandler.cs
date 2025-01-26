@@ -16,7 +16,7 @@ namespace BookReview.Application.Queries.AuthorQueries.GetAll
 
         public async Task<ResultViewModel<List<AuthorViewModel>>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
         {
-            var author = await _authorRepository.GetAllAsync();
+            var author = await _authorRepository.GetAllAsync(request.FullName);
 
             var model = author
                         .Select(a => new AuthorViewModel(a.FullName, a.DateBirth))
