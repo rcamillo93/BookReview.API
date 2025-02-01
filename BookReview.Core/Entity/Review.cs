@@ -20,5 +20,11 @@
 
         public Book Book { get; private set; }
         public User User { get; private set; }
+
+        public void Update(string description)
+        {
+            Description = description;
+            UpdateAt = DateTime.Now;
+        }
     }
 }

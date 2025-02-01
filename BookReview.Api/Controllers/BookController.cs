@@ -1,6 +1,7 @@
 ﻿using BookReview.Application.Commads.BookCommands.Create;
 using BookReview.Application.Commads.BookCommands.Update;
 using BookReview.Application.Commads.ReviewCommans.Create;
+using BookReview.Application.Commads.ReviewCommans.Update;
 using BookReview.Application.Queries.BookQueries.GetAll;
 using BookReview.Application.Queries.BookQueries.GetById;
 using MediatR;
@@ -70,6 +71,18 @@ namespace BookReview.Api.Controllers
 
         [HttpPost("review")]
         public async Task<IActionResult> PostReview(CreateReviewCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
+        }
+
+
+        [HttpPut("review")]
+        public async Task<IActionResult> PutReview(UpdateReviewCommand command)
         {
             var result = await _mediator.Send(command);
 

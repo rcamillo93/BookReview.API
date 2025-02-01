@@ -16,8 +16,4 @@
     <ProjectReference Include="..\BookReview.Core\BookReview.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commads\ReviewCommans\Update\" />
-  </ItemGroup>
-
 </Project>
