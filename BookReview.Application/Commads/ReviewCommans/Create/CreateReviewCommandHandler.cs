@@ -20,6 +20,14 @@ namespace BookReview.Application.Commads.ReviewCommans.Create
 
             await _bookRepository.AddReview(review);
 
+            var qtdReviews = await _bookRepository.CountReviewsByBookId(request.BookId);
+
+            qtdReviews = qtdReviews == 0 ? 1 : qtdReviews + 1;
+
+            var book = await _bookRepository.GetByIdAsync(request.BookId);
+
+            book.UpdateAverageGrade(qtdReviews , request.Rating);
+
             await _bookRepository.SaveChangesAsync();
 
             return ResultViewModel<int>.Sucess(review.Id);

@@ -47,5 +47,30 @@ namespace BookReview.Infrastructure.Persistence.Repositories
             await _dbContext.AddAsync(review);
         }
 
+        public async Task<Review?> GetReviewByIdAsync(int id)
+        {
+            return await _dbContext.Reviews
+                .Include(b => b.Book)
+                .Include(u => u.User)
+                .Include(a => a.Book.Author)
+                .SingleOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<List<Review>> GetAllReviewsAsync(string? bookTitle)
+        {
+            var query = _dbContext.Reviews
+                        .Include(r => r.Book)
+                        .AsQueryable();
+
+            if (!string.IsNullOrEmpty(bookTitle))
+                query = query.Where(r => EF.Functions.Like(r.Book.Title.ToUpper(), $"%{bookTitle.ToUpper()}%"));
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<int> CountReviewsByBookId(int bookId)
+        {
+            return await _dbContext.Reviews.CountAsync(r => r.BookId == bookId);
+        }
     }
 }

@@ -49,11 +49,11 @@ namespace BookReview.Infrastructure.Services.Auth
 
             var claims = new List<Claim>
             {
-                new Claim("username", email),
+                new Claim("userName", email),
                 new Claim(ClaimTypes.Role, role)
             };
 
-            var token = new JwtSecurityToken(issuer, audience, claims, null, DateTime.Now.AddHours(2));
+            var token = new JwtSecurityToken(issuer, audience, claims, null, DateTime.Now.AddHours(2), credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

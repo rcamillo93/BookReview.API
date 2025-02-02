@@ -51,5 +51,13 @@
             BookCover = bookCover;       
 
         }
+
+        public void UpdateAverageGrade(int qtdReviews, decimal rating)
+        {
+            if(AverageGrade is null)
+                AverageGrade = rating;
+            else
+                AverageGrade = ((AverageGrade * (qtdReviews - 1)) + rating) / qtdReviews;
+        }
     }
 }

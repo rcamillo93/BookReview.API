@@ -4,7 +4,10 @@ using BookReview.Application.Commads.ReviewCommans.Create;
 using BookReview.Application.Commads.ReviewCommans.Update;
 using BookReview.Application.Queries.BookQueries.GetAll;
 using BookReview.Application.Queries.BookQueries.GetById;
+using BookReview.Application.Queries.ReviewQueries.GetAll;
+using BookReview.Application.Queries.ReviewQueries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +15,7 @@ namespace BookReview.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BookController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -90,6 +94,32 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return NoContent();
+        }
+
+        [HttpGet("review/id")]
+        public async Task<IActionResult> GetReviewById(int id)
+        {
+            var query = new GetReviewByIdQuery(id);
+
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
+        [HttpGet("review")]
+        public async Task<IActionResult> GetAllReviews(string? bookTitle)
+        {
+            var query = new GetAllReviewsQuery(bookTitle);
+
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
     }
 }

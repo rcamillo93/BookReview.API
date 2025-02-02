@@ -1,14 +1,17 @@
 ﻿using BookReview.Application.Commads.UserCommands.Create;
+using BookReview.Application.Commads.UserCommands.Login;
 using BookReview.Application.Commads.UserCommands.Update;
 using BookReview.Application.Queries.UserQueries.GetAll;
 using BookReview.Application.Queries.UserQueries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookReview.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,6 +22,7 @@ namespace BookReview.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(CreateUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -64,6 +68,18 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return NoContent();
+        }
+
+        [HttpPut("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if(!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
     }
 }

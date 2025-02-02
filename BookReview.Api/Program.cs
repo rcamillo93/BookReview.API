@@ -17,6 +17,16 @@ builder.Services
     .AddApplication(builder.Configuration)
     .AddInfrastructure(builder.Configuration);
 
+builder.Services.AddSwaggerGen(c => c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+{
+    Name = "Authorization",
+    Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+    Scheme = "Bearer",
+    BearerFormat = "JWT",
+    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+    Description = "JWT Authorization header usando o esquema Bearer",
+}));
+
 builder.Services
     .AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<CreateBookCommand>();

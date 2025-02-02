@@ -3,6 +3,7 @@ using BookReview.Application.Commads.AuthorCommands.Update;
 using BookReview.Application.Queries.AuthorQueries.GetAll;
 using BookReview.Application.Queries.AuthorQueries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookReview.Api.Controllers
@@ -10,6 +11,7 @@ namespace BookReview.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
+    [Authorize]
     public class AuthorController : ControllerBase
     {
         private readonly IMediator _mediator;

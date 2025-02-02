@@ -8,5 +8,6 @@ namespace BookReview.Core.Repositories
         Task<User?> GetByIdAsync(int id);
         Task AddAsync(User book);
         Task SaveChangesAsync();
+        Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
     }
 }

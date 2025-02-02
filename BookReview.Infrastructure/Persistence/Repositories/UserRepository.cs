@@ -37,6 +37,13 @@ namespace BookReview.Infrastructure.Persistence.Repositories
         {
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
+        {
+            var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == password);
+
+            return user;
+        }
     }
 
 }

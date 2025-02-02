@@ -10,6 +10,9 @@ namespace BookReview.Core.Repositories
         Task SaveChangesAsync();
 
         Task AddReview(Review review);
-        Task<Review> GetReviewByIdAsync(int id);
+        Task<Review?> GetReviewByIdAsync(int id);
+        Task<List<Review>> GetAllReviewsAsync(string? bookTitle);
+
+        Task<int> CountReviewsByBookId(int bookId);
     }
 }

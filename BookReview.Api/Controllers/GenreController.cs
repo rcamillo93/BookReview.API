@@ -2,12 +2,14 @@
 using BookReview.Application.Queries.GenreQueries.GetAll;
 using BookReview.Application.Queries.GenreQueries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookReview.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GenreController : ControllerBase
     {
         private readonly IMediator _mediator;
