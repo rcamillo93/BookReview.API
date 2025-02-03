@@ -59,5 +59,10 @@
             else
                 AverageGrade = ((AverageGrade * (qtdReviews - 1)) + rating) / qtdReviews;
         }
+
+        public void RecalculateAverage(int qtdReviews)
+        {
+            AverageGrade = (AverageGrade * (qtdReviews - 1)) / qtdReviews;
+        }
     }
 }

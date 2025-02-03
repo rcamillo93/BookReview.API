@@ -1,6 +1,7 @@
 ﻿using BookReview.Application.Commads.BookCommands.Create;
 using BookReview.Application.Commads.BookCommands.Update;
 using BookReview.Application.Commads.ReviewCommans.Create;
+using BookReview.Application.Commads.ReviewCommans.Delete;
 using BookReview.Application.Commads.ReviewCommans.Update;
 using BookReview.Application.Queries.BookQueries.GetAll;
 using BookReview.Application.Queries.BookQueries.GetById;
@@ -120,6 +121,21 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return Ok(result);
+        }
+
+
+        [HttpDelete("review")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteReview(int reviewId)
+        {
+            var command = new DeleteReviewCommand(reviewId);
+
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
         }
     }
 }

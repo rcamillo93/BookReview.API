@@ -9,12 +9,14 @@
             BookId = bookId;
             Rating = rating;
             ReadingStartDate = readingStartDate;
+            Deleted = false;
         }
 
         public string Description { get; private set; }
         public int UserId { get; private set; }
         public int BookId { get; private set; }
         public int Rating { get; private set; }
+        public bool Deleted { get; private set; }
 
         public DateTime ReadingStartDate { get; private set; }
 
@@ -27,6 +29,10 @@
             UpdateAt = DateTime.Now;
         }
 
-        
+        public void Delete(bool deleted, int qtdReview)
+        {
+            Deleted = deleted;            
+            Book.RecalculateAverage(qtdReview);
+        }        
     }
 }

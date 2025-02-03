@@ -70,7 +70,7 @@ namespace BookReview.Infrastructure.Persistence.Repositories
 
         public async Task<int> CountReviewsByBookId(int bookId)
         {
-            return await _dbContext.Reviews.CountAsync(r => r.BookId == bookId);
+            return await _dbContext.Reviews.CountAsync(r => r.BookId == bookId && r.Deleted == false);
         }
     }
 }

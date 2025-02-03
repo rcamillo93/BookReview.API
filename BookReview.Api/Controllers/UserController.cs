@@ -1,4 +1,5 @@
 ﻿using BookReview.Application.Commads.UserCommands.Create;
+using BookReview.Application.Commads.UserCommands.Delete;
 using BookReview.Application.Commads.UserCommands.Login;
 using BookReview.Application.Commads.UserCommands.Update;
 using BookReview.Application.Queries.UserQueries.GetAll;
@@ -80,6 +81,20 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return Ok(result);
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            var command = new DeleteUserCommand(userId);
+
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
         }
     }
 }
