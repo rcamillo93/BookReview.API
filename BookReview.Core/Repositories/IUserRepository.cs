@@ -9,5 +9,6 @@ namespace BookReview.Core.Repositories
         Task AddAsync(User book);
         Task SaveChangesAsync();
         Task<User> GetUserByEmailAndPasswordAsync(string email, string password);
+        Task<bool> ValidateEmail(string email);
     }
 }

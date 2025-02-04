@@ -23,10 +23,13 @@
         public Book Book { get; private set; }
         public User User { get; private set; }
 
-        public void Update(string description)
+        public void Update(string description, int rating)
         {
             Description = description;
+            Rating = rating;
             UpdateAt = DateTime.Now;
+
+            Book.UpdateAverageGrade(Book.Reviews.Count, rating);
         }
 
         public void Delete(bool deleted, int qtdReview)

@@ -20,7 +20,9 @@ namespace BookReview.Application.Commads.ReviewCommans.Update
             if (review == null)
                 return ResultViewModel.Error("Review não encontrado.");
 
-            review.Update(request.Description);
+            review.Update(request.Description, request.Rating);
+
+            await _bookRepository.SaveChangesAsync();
 
             return ResultViewModel.Sucess();
         }

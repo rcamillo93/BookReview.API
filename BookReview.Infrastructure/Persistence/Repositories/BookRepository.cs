@@ -33,14 +33,15 @@ namespace BookReview.Infrastructure.Persistence.Repositories
 
         public async Task<Book?> GetByIdAsync(int id)
         {
-            return await _dbContext.Books.SingleOrDefaultAsync(b => b.Id == id);
+            return await _dbContext.Books
+                            .Include(b => b.Reviews)                            
+                            .SingleOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
         }
-
 
         public async Task AddReview(Review review)
         {
@@ -67,7 +68,6 @@ namespace BookReview.Infrastructure.Persistence.Repositories
 
             return await query.ToListAsync();
         }
-
         public async Task<int> CountReviewsByBookId(int bookId)
         {
             return await _dbContext.Reviews.CountAsync(r => r.BookId == bookId && r.Deleted == false);

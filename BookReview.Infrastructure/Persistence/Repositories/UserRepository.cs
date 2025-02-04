@@ -44,6 +44,11 @@ namespace BookReview.Infrastructure.Persistence.Repositories
 
             return user;
         }
+
+        public async Task<bool> ValidateEmail(string email)
+        {
+            return await _dbContext.Users.AnyAsync(u => u.Email == email);
+        }
     }
 
 }
