@@ -27,7 +27,7 @@
         {
             Description = description;
             Rating = rating;
-            UpdateAt = DateTime.Now;
+            UpdateAt = DateTime.UtcNow;
 
             Book.UpdateAverageGrade(Book.Reviews.Count, rating);
         }

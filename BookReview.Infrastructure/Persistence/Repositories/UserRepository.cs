@@ -25,6 +25,8 @@ namespace BookReview.Infrastructure.Persistence.Repositories
             if(!string.IsNullOrEmpty(fullName))
                 query = query.Where(u => EF.Functions.Like(u.FullName.ToUpper(), $"%{fullName.ToUpper()}%"));
 
+            query = query.Where(u => u.Active);
+
             return await query.ToListAsync();
         }
 
@@ -40,7 +42,7 @@ namespace BookReview.Infrastructure.Persistence.Repositories
 
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
-            var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == password);
+            var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == password && u.Active);
 
             return user;
         }
@@ -48,6 +50,11 @@ namespace BookReview.Infrastructure.Persistence.Repositories
         public async Task<bool> ValidateEmail(string email)
         {
             return await _dbContext.Users.AnyAsync(u => u.Email == email);
+        }
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            return await _dbContext.Users.SingleOrDefaultAsync(u =>u.Email == email && u.Active);
         }
     }
 

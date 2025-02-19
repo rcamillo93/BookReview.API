@@ -14,10 +14,10 @@ namespace BookReview.Application.Commads.ReviewCommans.Create
             ReadingStartDate = readingStartDate;
         }
 
-        public string Description { get; private set; }
-        public int UserId { get; private set; }
-        public int BookId { get; private set; }
-        public int Rating { get; private set; }
-        public DateTime ReadingStartDate { get; private set; }
+        public string Description { get; set; }
+        public int UserId { get; set; }
+        public int BookId { get; set; }
+        public int Rating { get; set; }
+        public DateTime ReadingStartDate { get; set; }
     }
 }

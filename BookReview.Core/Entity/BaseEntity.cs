@@ -8,7 +8,7 @@
         }
 
         public int Id { get; private set; }
-        public DateTime CreatedAt { get; protected set; } = DateTime.Now;
+        public DateTime CreatedAt { get; protected set; } = DateTime.UtcNow;
         public DateTime? UpdateAt { get; protected set; }
     }
 }

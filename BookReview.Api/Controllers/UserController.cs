@@ -1,12 +1,14 @@
 ﻿using BookReview.Application.Commads.UserCommands.Create;
 using BookReview.Application.Commads.UserCommands.Delete;
 using BookReview.Application.Commads.UserCommands.Login;
+using BookReview.Application.Commads.UserCommands.ForgotPassword;
 using BookReview.Application.Commads.UserCommands.Update;
 using BookReview.Application.Queries.UserQueries.GetAll;
 using BookReview.Application.Queries.UserQueries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BookReview.Application.Commads.UserCommands.RecoveryPassword;
 
 namespace BookReview.Api.Controllers
 {
@@ -95,6 +97,30 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return NoContent();
+        }
+
+        [HttpPut("forgotpassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(ForgotPassowrdCommand command)
+        {     
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(new { hash = result.Data });
+        }
+
+        [HttpPut("recoverpassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RecoveryPassword([FromBody]RecoverPasswordCommand command, [FromQuery] string hash)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
     }
 }

@@ -66,8 +66,11 @@ namespace BookReview.Infrastructure.Persistence.Repositories
             if (!string.IsNullOrEmpty(bookTitle))
                 query = query.Where(r => EF.Functions.Like(r.Book.Title.ToUpper(), $"%{bookTitle.ToUpper()}%"));
 
+            query = query.Where(r => r.Deleted == false);
+
             return await query.ToListAsync();
         }
+
         public async Task<int> CountReviewsByBookId(int bookId)
         {
             return await _dbContext.Reviews.CountAsync(r => r.BookId == bookId && r.Deleted == false);

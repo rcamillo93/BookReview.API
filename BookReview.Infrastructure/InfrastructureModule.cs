@@ -1,5 +1,6 @@
 ﻿using BookReview.Core.Repositories;
 using BookReview.Core.Services;
+using BookReview.Infrastructure.Notifications;
 using BookReview.Infrastructure.Persistence;
 using BookReview.Infrastructure.Persistence.Repositories;
 using BookReview.Infrastructure.Services.Auth;
@@ -18,6 +19,7 @@ namespace BookReview.Infrastructure
         {
             services
                 .AddRepositories(configuration)
+                .AddServices(configuration)
                 .AddAuth(configuration);
 
             return services;
@@ -32,6 +34,13 @@ namespace BookReview.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>(); 
+
+            return services;
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+        {            
+            services.AddTransient<IEmailService, EmailService>();
 
             return services;
         }

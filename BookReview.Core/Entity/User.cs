@@ -29,6 +29,7 @@ namespace BookReview.Core.Entity
         public void UpdateStatus(bool active)
         {
             Active = active;
+            UpdateAt = DateTime.UtcNow;
         }
 
         public void Update(string fullName, string email, bool? status)
@@ -41,11 +42,21 @@ namespace BookReview.Core.Entity
 
             if(status != null)
                 Active = (bool)status;
+
+            UpdateAt = DateTime.UtcNow;
         }
 
         public void UpdatePassword(string password)
         {
             Password = password;
+            TemporaryPassword = null;
+            ValidateHash = null;
+        }
+
+        public void StartRecoveryPassword(string temporaryPassword)
+        {
+            TemporaryPassword = temporaryPassword;
+            ValidateHash = DateTime.Now.AddHours(1);
         }
     }
 }

@@ -57,5 +57,25 @@ namespace BookReview.Infrastructure.Services.Auth
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public string GenerateTemporaryPassword(int length)
+        {
+            const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+            char[] password = new char[length];
+
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                byte[] randomBytes = new byte[length];
+
+                rng.GetBytes(randomBytes);
+
+                for (int i = 0; i < length; i++)
+                {
+                    password[i] = validChars[randomBytes[i] % validChars.Length];
+                }
+            }
+
+            return new string(password);
+        }
     }
 }

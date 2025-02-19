@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.Api", "BookReview.Api\BookReview.Api.csproj", "{86C7313A-2521-45EC-84F2-65E35F86036C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookReview.Api", "BookReview.Api\BookReview.Api.csproj", "{86C7313A-2521-45EC-84F2-65E35F86036C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.Core", "BookReview.Core\BookReview.Core.csproj", "{B89CA1B7-A1D2-4A4D-9BDE-D4A6782EB265}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookReview.Core", "BookReview.Core\BookReview.Core.csproj", "{B89CA1B7-A1D2-4A4D-9BDE-D4A6782EB265}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.Infrastructure", "BookReview.Infrastructure\BookReview.Infrastructure.csproj", "{2DB8053C-4ADE-4548-896A-A8A315D5646C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookReview.Infrastructure", "BookReview.Infrastructure\BookReview.Infrastructure.csproj", "{2DB8053C-4ADE-4548-896A-A8A315D5646C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.Application", "BookReview.Application\BookReview.Application.csproj", "{34BAF294-5D9E-4478-BB1E-F2DA8F96ADAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookReview.Application", "BookReview.Application\BookReview.Application.csproj", "{34BAF294-5D9E-4478-BB1E-F2DA8F96ADAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.UnitTests", "BookReview.UnitTests\BookReview.UnitTests.csproj", "{34498902-A75B-4D4E-8DED-B4F81EBADB9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{34BAF294-5D9E-4478-BB1E-F2DA8F96ADAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34BAF294-5D9E-4478-BB1E-F2DA8F96ADAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34BAF294-5D9E-4478-BB1E-F2DA8F96ADAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34498902-A75B-4D4E-8DED-B4F81EBADB9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34498902-A75B-4D4E-8DED-B4F81EBADB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34498902-A75B-4D4E-8DED-B4F81EBADB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34498902-A75B-4D4E-8DED-B4F81EBADB9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

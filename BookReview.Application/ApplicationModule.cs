@@ -1,8 +1,6 @@
 ﻿using BookReview.Application.Commads.AuthorCommands.Create;
-using BookReview.Application.Models;
 using BookReview.Application.Services;
 using BookReview.Application.Services.Interfaces;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +21,8 @@ namespace BookReview.Application
         {
             services.AddMediatR(config =>
                 config.RegisterServicesFromAssemblyContaining<CreateAuthorCommand>());
+
+           // services.AddTransient<IPipelineBehavior<ForgotPassowrdCommand, ResultViewModel>, ForgotPassowrdBehavior>();
 
             return services;
         }
