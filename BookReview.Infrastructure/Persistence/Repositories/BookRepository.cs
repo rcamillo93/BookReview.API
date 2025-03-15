@@ -1,4 +1,5 @@
 ﻿using BookReview.Core.Entity;
+using BookReview.Core.Models;
 using BookReview.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -74,6 +75,41 @@ namespace BookReview.Infrastructure.Persistence.Repositories
         public async Task<int> CountReviewsByBookId(int bookId)
         {
             return await _dbContext.Reviews.CountAsync(r => r.BookId == bookId && r.Deleted == false);
+        }
+
+        public async Task<Book?> GetBookByIsbn(string isbn)
+        {
+            return await _dbContext.Books.FirstOrDefaultAsync(b => b.ISBN == isbn);
+        }
+
+        public async Task<List<RatedBooksReportModel>> GetRatedBooksReport()
+        {
+            var query = from b in _dbContext.Books
+                        join a in _dbContext.Authors on b.AuthorId equals a.Id
+                        join r in _dbContext.Reviews on b.Id equals r.BookId
+                        join g in _dbContext.Genres on b.GenreId equals g.Id
+                        where r.Deleted == false                     
+                        group new { b, a, g } by new
+                        {
+                            b.Id,
+                            a.FullName,
+                            b.Title,
+                            g.Description,
+                            b.BookCover,                            
+                            b.AverageGrade
+                        } into g
+                        select new RatedBooksReportModel
+                        {
+                            BookId = g.Key.Id,
+                            Author = g.Key.FullName,
+                            Title = g.Key.Title,                          
+                            Genre = g.Key.Description,
+                            BookCover = g.Key.BookCover,
+                            QtdReviews = g.Count(),
+                            AverageGrade = g.Key.AverageGrade
+                        };
+
+            return await query.OrderByDescending(x => x.AverageGrade).ToListAsync();
         }
     }
 }

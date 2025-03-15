@@ -5,6 +5,7 @@ using BookReview.Application.Commads.ReviewCommans.Delete;
 using BookReview.Application.Commads.ReviewCommans.Update;
 using BookReview.Application.Queries.BookQueries.GetAll;
 using BookReview.Application.Queries.BookQueries.GetById;
+using BookReview.Application.Queries.ReportQueries;
 using BookReview.Application.Queries.ReviewQueries.GetAll;
 using BookReview.Application.Queries.ReviewQueries.GetById;
 using MediatR;
@@ -16,7 +17,7 @@ namespace BookReview.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  //  [Authorize]
     public class BookController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -136,6 +137,17 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return NoContent();
+        }
+
+
+        [HttpGet("review/report")]
+        public async Task<IActionResult> GetReportReviews()
+        {
+            var query = new GetReportQuery();
+
+            var result = await _mediator.Send(query);
+
+            return File(result, "application/pdf", $"RatedBooksReport-{DateTime.Now.ToShortDateString()}.pdf");
         }
     }
 }

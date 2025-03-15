@@ -20,6 +20,11 @@ namespace BookReview.Application.Commads.BookCommands.Create
                                                       request.AuthorId, request.Publisher, request.GenreId,
                                                       request.PublicationYear, request.QuantityPages, request.BookCover);
 
+            var validIsbn = await _bookRepository.GetBookByIsbn(request.ISBN);
+
+            if (validIsbn != null)
+                return ResultViewModel<int>.Error($"Já existe um livro com a ISBN {request.ISBN}");
+
             await _bookRepository.AddAsync(book);
             await _bookRepository.SaveChangesAsync();
 

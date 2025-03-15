@@ -1,4 +1,5 @@
 ﻿using BookReview.Core.Entity;
+using BookReview.Core.Models;
 
 namespace BookReview.Core.Repositories
 {
@@ -6,6 +7,7 @@ namespace BookReview.Core.Repositories
     {
         Task<List<Book>> GetAllAsync(int? authorId, string? title);
         Task<Book?> GetByIdAsync(int id);
+        Task<Book?> GetBookByIsbn(string isbn);
         Task AddAsync(Book book);
         Task SaveChangesAsync();
 
@@ -14,5 +16,7 @@ namespace BookReview.Core.Repositories
         Task<List<Review>> GetAllReviewsAsync(string? bookTitle);
 
         Task<int> CountReviewsByBookId(int bookId);
+
+        Task<List<RatedBooksReportModel>> GetRatedBooksReport();
     }
 }

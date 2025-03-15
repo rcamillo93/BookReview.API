@@ -3,6 +3,7 @@ using BookReview.Core.Services;
 using BookReview.Infrastructure.Notifications;
 using BookReview.Infrastructure.Persistence;
 using BookReview.Infrastructure.Persistence.Repositories;
+using BookReview.Infrastructure.Services;
 using BookReview.Infrastructure.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ namespace BookReview.Infrastructure
         private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {            
             services.AddTransient<IEmailService, EmailService>();
+            services.AddScoped<IReportService, ReportService>();
 
             return services;
         }

@@ -24,6 +24,10 @@ namespace BookReview.Application.Validators
                         .WithMessage("A descrição é obrigatória.")
                     .InclusiveBetween(1, 5)
                        .WithMessage("Informe uma nota de 1 à 5.");
+
+            RuleFor(r => r.ReadingStartDate)
+                .LessThan(DateTime.Now)
+                    .WithMessage("A data de início da leitura deve ser menor que a data da avaliação.");
         }
     }
 }

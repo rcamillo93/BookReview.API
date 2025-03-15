@@ -31,6 +31,8 @@ builder.Services
     .AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<CreateBookCommand>();
 
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
