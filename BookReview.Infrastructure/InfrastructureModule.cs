@@ -1,5 +1,6 @@
 ﻿using BookReview.Core.Repositories;
 using BookReview.Core.Services;
+using BookReview.Infrastructure.Cloud;
 using BookReview.Infrastructure.Notifications;
 using BookReview.Infrastructure.Persistence;
 using BookReview.Infrastructure.Persistence.Repositories;
@@ -43,6 +44,7 @@ namespace BookReview.Infrastructure
         {            
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<ICloudStorageService, CloudStorageService>();
 
             return services;
         }

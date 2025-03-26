@@ -21,7 +21,7 @@ namespace BookReview.Application.Commads.BookCommands.Update
                 return ResultViewModel.Error("Livro não encontrado");
 
             book.Update(request.Title, request.Description, request.ISBN, request.AuthorId, request.Publisher, 
-                        request.GenreId, request.PublicationYear, request.QuantityPages, request.BookCover);
+                        request.GenreId, request.PublicationYear, request.QuantityPages);
 
             await _bookRepository.SaveChangesAsync();
 

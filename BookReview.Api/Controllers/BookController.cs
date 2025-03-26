@@ -1,5 +1,6 @@
 ﻿using BookReview.Application.Commads.BookCommands.Create;
 using BookReview.Application.Commads.BookCommands.Update;
+using BookReview.Application.Commads.BookCommands.UpdateBookCover;
 using BookReview.Application.Commads.ReviewCommans.Create;
 using BookReview.Application.Commads.ReviewCommans.Delete;
 using BookReview.Application.Commads.ReviewCommans.Update;
@@ -12,12 +13,13 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BookReview.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize]
+    [Authorize]
     public class BookController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -36,6 +38,17 @@ namespace BookReview.Api.Controllers
                 return BadRequest(result.Message);
 
             return Ok(result);
+        }
+
+        [HttpPost("all")]
+        public async Task<IActionResult> PostColletion(List<CreateBookCommand> commands)
+        {
+            foreach (var command in commands)
+            {
+                await _mediator.Send(command);
+            }
+
+            return Ok();
         }
 
         [HttpGet]
@@ -74,6 +87,18 @@ namespace BookReview.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut("updateImage")]
+        public async Task<IActionResult> PutBookCover(UpdateBookCoverCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
 
         [HttpPost("review")]
         public async Task<IActionResult> PostReview(CreateReviewCommand command)

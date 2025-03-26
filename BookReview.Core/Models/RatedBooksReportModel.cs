@@ -18,6 +18,7 @@
         public string Title { get; set; } 
         public string Genre { get; set; }
         public string BookCover { get; set; }
+        public string BookCoverBase64 { get; set; }
         public int QtdReviews { get; set; }
         public decimal? AverageGrade { get; set; }
 

@@ -38,7 +38,7 @@
 
         public void Update(string title, string description, string iSBN, int authorId,
                     string publisher, int genreId, int publicationYear,
-                    int quantityPages, string bookCover)
+                    int quantityPages)
         {
             Title = title;
             Description = description;
@@ -47,9 +47,7 @@
             Publisher = publisher;
             GenreId = genreId;
             PublicationYear = publicationYear;
-            QuantityPages = quantityPages;
-            BookCover = bookCover;       
-
+            QuantityPages = quantityPages;      
         }
 
         public void UpdateAverageGrade(int qtdReviews, decimal rating)
@@ -63,6 +61,11 @@
         public void RecalculateAverage(int qtdReviews)
         {
             AverageGrade = (AverageGrade * (qtdReviews - 1)) / qtdReviews;
+        }
+
+        public void UpdateBookCover(string url)
+        {
+            BookCover = url;
         }
     }
 }

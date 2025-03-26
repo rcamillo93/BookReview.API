@@ -77,15 +77,19 @@ namespace BookReview.Infrastructure.Reports
                               {          
                                   t.Cell().Row(rowIndex).Column(1).Element(Entry).Text(book.Title);
                                   t.Cell().Row(rowIndex).Column(2).Element(Entry).Text(book.Author);
-                                  t.Cell().Row(rowIndex).Column(3).Element(Entry).Text(book.QtdReviews.ToString());
-                                  t.Cell().Row(rowIndex).Column(4).Element(Entry).Text(book.BookCover);
+                                  t.Cell().Row(rowIndex).Column(3).Element(Entry).Text(book.QtdReviews.ToString());                                 
+
+                                  if (!string.IsNullOrEmpty(book.BookCoverBase64))
+                                  {
+                                      t.Cell().Row(rowIndex).Column(4).Element(Entry).Image(Base64ToByteArray(book.BookCoverBase64));
+                                  }                      
+                                        
+
                                   t.Cell().Row(rowIndex).Column(5).Element(Entry).Text(book.AverageGrade.ToString());
 
                                   rowIndex++;
                               }
-                          });
-
-                       //   column.Item().PaddingVertical(20);
+                          });                    
                       }
                   });
 
@@ -120,6 +124,11 @@ namespace BookReview.Infrastructure.Reports
                    .MinHeight(20)
                    .AlignCenter()
                    .AlignMiddle();
+        }
+
+        private static byte[] Base64ToByteArray(string base64)
+        {
+            return Convert.FromBase64String(base64);
         }
     }
 }

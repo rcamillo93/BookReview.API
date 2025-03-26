@@ -7,7 +7,7 @@ namespace BookReview.Application.Commads.BookCommands.Update
     {
         public UpdateBookCommand(int id, string title, string description, string
                                 iSBN, int authorId, string publisher, int genreId,
-                                int publicationYear, int quantityPages, string bookCover)
+                                int publicationYear, int quantityPages)
         {
             Id = id;
             Title = title;
@@ -17,8 +17,7 @@ namespace BookReview.Application.Commads.BookCommands.Update
             Publisher = publisher;
             GenreId = genreId;
             PublicationYear = publicationYear;
-            QuantityPages = quantityPages;
-            BookCover = bookCover;
+            QuantityPages = quantityPages;         
         }
 
         public int Id { get; private set; }
@@ -29,7 +28,6 @@ namespace BookReview.Application.Commads.BookCommands.Update
         public string Publisher { get; private set; }
         public int GenreId { get; private set; }
         public int PublicationYear { get; private set; }
-        public int QuantityPages { get; private set; }
-        public string BookCover { get; private set; }
+        public int QuantityPages { get; private set; }      
     }
 }
